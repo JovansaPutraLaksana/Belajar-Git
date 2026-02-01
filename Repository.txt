@@ -34,3 +34,6 @@ git restore --staged <nama file>
 
 #Memindahkan file dari Staging area ke Repository
 git commit -m "<pesan keterangan>"
+
+#Melihat perubahan yan terjadi pada file
+git diff
