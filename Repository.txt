@@ -1,0 +1,36 @@
+#The Three States (Modified,Staged,Committed)
+#Modified = file telah berubah namun belum disimpan secara permanen ke repository
+#Staged = menandai modifikasi yang telah dilakukan terhadap file akan disimpan ke repository
+#Committed = file sudah tersimpan di repository
+
+#Three Section (Working directory, Staging area, Repository)
+#Working directory = tempat file akan dimodifikasi
+#Staging area = tempat persiapan file akan di simpan di repository
+#Repository = tempat semua file riwayat snapshot(kumpulan perubahan) disimpan
+
+#Tahap workflow Git
+#Working directory -> (git add) -> Staging area -> (git commit) -> Repository 
+
+#Perintah dasar cmd
+cd <nama folder> (masuk kedalam directory)
+cd .. (mundur dari directory)
+mkdir <nama folder> (membuat folder baru pada directory)
+dir (melihat file normal dari folder)
+dir /a (melihat semua isi dari folder)
+dir /a:h (melihat file hidden dari folder)
+
+#Cara membuat repository Git pada directory
+git init
+
+#Melihat perubahan pada git (Merah = Working directory, Hijau = Staging area)
+git status
+
+#Memindahkan file dari Working directory ke Staging area.
+git add .(untuk semua file)
+git add <nama file> (khusus yang yang disebut (case sensitive))
+
+#Memindahkan file dari Staging area ke Working directory
+git restore --staged <nama file>
+
+#Memindahkan file dari Staging area ke Repository
+git commit -m "<pesan keterangan>"
