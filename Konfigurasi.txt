@@ -1,0 +1,11 @@
+#Konfigurasi user name dan email (wajib setelah download Git)
+git config --global user.name "<Nama Kalian>"
+git config --global user.email "<Email Kalian>"
+
+#Intergrasi VSCode sebagai default editor untuk Git dan default diff tool (Opsional)
+git config --global core.editor "code --wait"
+git config --global diff.tool "default-difftool"
+git config --global difftool.default-difftool.cmd "code --wait --diff \$LOCAL \$REMOTE"
+
+#Cek status Git
+git config --list --show-origin
