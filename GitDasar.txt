@@ -1,3 +1,5 @@
+#Repository Local/Hanya pada komputer pribadi (Belum Remote ke Repository Github Public)
+
 #The Three States (Modified,Staged,Committed)
 #Modified = file telah berubah namun belum disimpan secara permanen ke repository
 #Staged = menandai modifikasi yang telah dilakukan terhadap file akan disimpan ke repository
@@ -46,7 +48,7 @@ git restore <nama file>
 #Memindahkan file dari Staging area ke Working directory
 git restore --staged <nama file>
 
-#Melihat commit log (history snapshot)
+#Melihat commit log (history snapshot) hash didapatkan dari log warna kuning
 git log
 git log --oneline (sederhana)
 git log --oneline --graph (melihat graph dari git branch)
@@ -56,4 +58,17 @@ git show <hash>
 #mode reset => --soft (Staging area dan Working directory tidak berubah/dihapus)
 #mode reset => --mixed (Staging area reset tetapi Working directory aman)
 #mode reset => --hard (Reset semua Stage kembali saat commit HEAD sebelumnya)
+#Selagi belum commit baru. maka bisa batalkan reset commit apabila masih ingat hash dari HEAD sebelumnya 
 git reset <mode> <hash yang akan menjadi HEAD>
+
+#Amend commit (commit ketingalan)
+git commit --amend -m "<pesan>"
+
+#Melihat isi file dari commit sebelumnya dengan cara mengambil isi file dan disimpan ke Staging area
+git checkout <hash> -- <nama file>
+git checkout <hash> (semua file)
+git checkout <nama branch> (kembali ke HEAD dari branch)
+
+#Melihat posisi branch sekarang
+git branch --show-current
+
