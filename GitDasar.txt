@@ -1,74 +1,304 @@
-#Repository Local/Hanya pada komputer pribadi (Belum Remote ke Repository Github Public)
+CATATAN GIT DASAR (REPOSITORY LOCAL)
+===================================
 
-#The Three States (Modified,Staged,Committed)
-#Modified = file telah berubah namun belum disimpan secara permanen ke repository
-#Staged = menandai modifikasi yang telah dilakukan terhadap file akan disimpan ke repository
-#Committed = file sudah tersimpan di repository
+Catatan ini membahas penggunaan Git secara LOCAL
+(tanpa remote repository seperti GitHub).
 
-#Three Section (Working directory, Staging area, Repository)
-#Working directory = tempat file akan dimodifikasi
-#Staging area = tempat persiapan file akan di simpan di repository
-#Repository = tempat semua file riwayat snapshot(kumpulan perubahan) disimpan
 
-#Tahap workflow Git
-#Working directory -> (git add) -> Staging area -> (git commit) -> Repository 
+--------------------------------------------------
+1. KONSEP DASAR REPOSITORY LOCAL
+--------------------------------------------------
 
-#Perintah dasar cmd
-cd <nama folder> (masuk kedalam directory)
-cd .. (mundur dari directory)
-mkdir <nama folder> (membuat folder baru pada directory)
-dir (melihat file normal dari folder)
-dir /a (melihat semua isi dari folder)
-dir /a:h (melihat file hidden dari folder)
+Repository Local:
+- Repository Git yang hanya ada di komputer pribadi
+- Belum terhubung dengan GitHub / GitLab / Remote repository
+- Semua perubahan hanya tersimpan secara lokal
 
-#Cara membuat repository Git pada directory
+
+--------------------------------------------------
+2. THE THREE STATES (3 STATUS FILE DI GIT)
+--------------------------------------------------
+
+1. Modified
+   - File telah berubah
+   - Perubahan BELUM disiapkan untuk disimpan ke repository
+   - Status: masih di Working Directory
+
+2. Staged
+   - File telah ditandai untuk disimpan
+   - Perubahan sudah masuk ke Staging Area
+   - Menunggu commit
+
+3. Committed
+   - File sudah tersimpan permanen di repository
+   - Tercatat sebagai snapshot (riwayat)
+
+
+--------------------------------------------------
+3. THREE SECTION (3 AREA DI GIT)
+--------------------------------------------------
+
+1. Working Directory
+   - Tempat kita bekerja
+   - File bisa dibuat, diedit, dihapus
+   - Perubahan belum dicatat Git
+
+2. Staging Area
+   - Area persiapan sebelum commit
+   - Git tahu file mana saja yang akan disimpan
+
+3. Repository
+   - Tempat penyimpanan snapshot (riwayat perubahan)
+   - Setiap commit = satu snapshot
+
+
+--------------------------------------------------
+4. WORKFLOW DASAR GIT
+--------------------------------------------------
+
+Alur kerja Git:
+
+Working Directory
+        |
+        | (git add)
+        v
+Staging Area
+        |
+        | (git commit)
+        v
+Repository
+
+
+--------------------------------------------------
+5. PERINTAH DASAR CMD / TERMINAL
+--------------------------------------------------
+
+cd <nama folder>
+- Masuk ke folder tertentu
+
+cd ..
+- Mundur satu level folder
+
+mkdir <nama folder>
+- Membuat folder baru
+
+dir
+- Melihat isi folder (file normal)
+
+dir /a
+- Melihat semua file termasuk hidden
+
+dir /a:h
+- Melihat file hidden saja
+
+
+--------------------------------------------------
+6. MEMBUAT REPOSITORY GIT
+--------------------------------------------------
+
+Perintah:
 git init
 
-#Melihat perubahan pada git (Merah = Working directory, Hijau = Staging area)
+Penjelasan:
+- Membuat repository Git baru
+- Akan muncul folder tersembunyi .git
+- Folder ini berisi semua data Git
+
+
+--------------------------------------------------
+7. MELIHAT STATUS PERUBAHAN
+--------------------------------------------------
+
+Perintah:
 git status
 
-#Memindahkan file dari Working directory ke Staging area.
-git add .(untuk semua file)
-git add <nama file> (khusus yang yang disebut (case sensitive))
+Keterangan warna:
+- Merah  : perubahan di Working Directory
+- Hijau  : perubahan di Staging Area
 
-#Memindahkan file dari Staging area ke Repository
+
+--------------------------------------------------
+8. MENAMBAHKAN FILE KE STAGING AREA
+--------------------------------------------------
+
+Menambahkan semua file:
+git add .
+
+Menambahkan file tertentu:
+git add <nama file>
+
+Catatan:
+- Case sensitive
+- File harus ada di Working Directory
+
+
+--------------------------------------------------
+9. MENYIMPAN PERUBAHAN (COMMIT)
+--------------------------------------------------
+
+Perintah:
 git commit -m "<pesan keterangan>"
 
-#Melihat perubahan yan terjadi pada file
-git diff
-git diff <hash> HEAD (membandingkan perubahan dari snapshot hash ke HEAD (snapshot sekarang))
-git difftool <hash1> <hash2> (membandingkan di VSCode wajib setting konfigurasi)
+Penjelasan:
+- Menyimpan snapshot ke Repository
+- Pesan commit harus jelas dan singkat
 
-#Hapus perubahan di Working directory
+
+--------------------------------------------------
+10. MELIHAT PERBEDAAN FILE (DIFF)
+--------------------------------------------------
+
+Melihat perubahan Working Directory:
+git diff
+
+Membandingkan commit lama dengan HEAD:
+git diff <hash> HEAD
+
+Menggunakan VS Code (Diff Tool):
+git difftool <hash1> <hash2>
+
+Catatan:
+- Difftool butuh konfigurasi VS Code terlebih dahulu
+
+
+--------------------------------------------------
+11. MENGHAPUS & MEMBATALKAN PERUBAHAN
+--------------------------------------------------
+
+Menghapus file untracked (PERMANEN):
 git clean -f
 
-#Membatalkan perubahan file di Working directory
+Membatalkan perubahan file di Working Directory:
 git restore <nama file>
 
-#Memindahkan file dari Staging area ke Working directory
+Mengembalikan file dari Staging ke Working Directory:
 git restore --staged <nama file>
 
-#Melihat commit log (history snapshot) hash didapatkan dari log warna kuning
+
+--------------------------------------------------
+12. MELIHAT RIWAYAT COMMIT
+--------------------------------------------------
+
+Melihat semua commit:
 git log
-git log --oneline (sederhana)
-git log --oneline --graph (melihat graph dari git branch)
+
+Tampilan singkat:
+git log --oneline
+
+Dengan graph branch:
+git log --oneline --graph
+
+Melihat detail commit:
 git show <hash>
 
-#Reset commit (mundur HEAD pada commit ke hash yang diinginkan)
-#mode reset => --soft (Staging area dan Working directory tidak berubah/dihapus)
-#mode reset => --mixed (Staging area reset tetapi Working directory aman)
-#mode reset => --hard (Reset semua Stage kembali saat commit HEAD sebelumnya)
-#Selagi belum commit baru. maka bisa batalkan reset commit apabila masih ingat hash dari HEAD sebelumnya 
-git reset <mode> <hash yang akan menjadi HEAD>
 
-#Amend commit (commit ketingalan)
+--------------------------------------------------
+13. RESET COMMIT (MEMINDAHKAN HEAD)
+--------------------------------------------------
+
+Perintah:
+git reset <mode> <hash>
+
+Mode reset:
+--soft
+- HEAD pindah
+- Staging Area & Working Directory aman
+
+--mixed (default)
+- HEAD pindah
+- Staging Area di-reset
+- Working Directory aman
+
+--hard
+- HEAD pindah
+- Staging Area & Working Directory dihapus
+
+Catatan penting:
+- Jika belum commit baru, reset masih bisa dibatalkan
+  jika masih ingat hash HEAD sebelumnya
+
+
+--------------------------------------------------
+14. AMEND COMMIT
+--------------------------------------------------
+
+Perintah:
 git commit --amend -m "<pesan>"
 
-#Melihat isi file dari commit sebelumnya dengan cara mengambil isi file dan disimpan ke Staging area
-git checkout <hash> -- <nama file>
-git checkout <hash> (semua file)
-git checkout <nama branch> (kembali ke HEAD dari branch)
+Penjelasan:
+- Mengubah commit terakhir
+- Bisa untuk:
+  - Ganti pesan commit
+  - Menambahkan file yang lupa di-commit
 
-#Melihat posisi branch sekarang
+
+--------------------------------------------------
+15. MENGAMBIL FILE DARI COMMIT LAMA
+--------------------------------------------------
+
+Mengambil satu file:
+git checkout <hash> -- <nama file>
+
+Mengambil semua file:
+git checkout <hash>
+
+Kembali ke branch aktif:
+git checkout <nama branch>
+
+
+--------------------------------------------------
+16. MELIHAT BRANCH AKTIF
+--------------------------------------------------
+
+Perintah:
 git branch --show-current
 
+
+--------------------------------------------------
+17. REVERT COMMIT
+--------------------------------------------------
+
+Perintah:
+git revert <hash>
+
+Penjelasan:
+- Membatalkan commit dengan commit BARU
+- Aman untuk histori
+- Tidak memindahkan HEAD ke belakang
+
+
+--------------------------------------------------
+18. GITIGNORE
+--------------------------------------------------
+
+File:
+.gitignore
+
+Contoh isi:
+Ignore folder:
+<nama folder>/
+
+Ignore extension:
+*.log
+*.tmp
+
+Ignore file tertentu:
+.env
+config.json
+
+
+--------------------------------------------------
+19. BLAME
+--------------------------------------------------
+
+Perintah:
+git blame <nama file>
+
+Penjelasan:
+- Melihat siapa yang menambahkan baris kode
+- Berguna untuk tracking perubahan
+
+
+--------------------------------------------------
+SELESAI
+--------------------------------------------------

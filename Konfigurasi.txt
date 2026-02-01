@@ -1,11 +1,102 @@
-#Konfigurasi user name dan email (wajib setelah download Git)
+CATATAN KONFIGURASI GIT DASAR
+============================
+
+File ini berisi catatan konfigurasi Git yang WAJIB dan OPSIONAL
+setelah meng-install Git di komputer.
+
+
+--------------------------------------------------
+1. KONFIGURASI USER NAME DAN EMAIL (WAJIB)
+--------------------------------------------------
+
+Perintah:
 git config --global user.name "<Nama Kalian>"
 git config --global user.email "<Email Kalian>"
 
-#Intergrasi VSCode sebagai default editor untuk Git dan default diff tool (Opsional)
-git config --global core.editor "code --wait"
-git config --global diff.tool "default-difftool"
-git config --global difftool.default-difftool.cmd "code --wait --diff \$LOCAL \$REMOTE"
+Penjelasan:
+- user.name  : Nama yang akan tercatat di setiap commit Git
+- user.email : Email yang akan tercatat di setiap commit Git
 
-#Cek status Git
+Catatan penting:
+- Nama dan email ini BUKAN akun GitHub, tapi identitas commit
+- Email sebaiknya sama dengan email GitHub agar commit terbaca sebagai milikmu
+- Opsi --global artinya konfigurasi berlaku untuk SEMUA repository di komputer ini
+
+Contoh:
+git config --global user.name "Jovansa Putra Laksana"
+git config --global user.email "jovansaputralaksana@gmail.com"
+
+
+--------------------------------------------------
+2. INTEGRASI VS CODE SEBAGAI EDITOR GIT (OPSIONAL)
+--------------------------------------------------
+
+Perintah:
+git config --global core.editor "code --wait"
+
+Penjelasan:
+- Mengatur Visual Studio Code sebagai editor default Git
+- Digunakan saat:
+  - Menulis pesan commit tanpa -m
+  - Resolve merge conflict
+- Opsi --wait membuat Git MENUNGGU sampai VSCode ditutup
+
+
+--------------------------------------------------
+3. KONFIGURASI DIFF TOOL MENGGUNAKAN VS CODE (OPSIONAL)
+--------------------------------------------------
+
+Perintah:
+git config --global diff.tool "default-difftool"
+git config --global difftool.default-difftool.cmd "code --wait --diff $LOCAL $REMOTE"
+
+Penjelasan:
+- Diff tool digunakan untuk membandingkan perubahan file
+- VS Code akan menampilkan:
+  - File versi lama (LOCAL)
+  - File versi baru (REMOTE)
+- Berguna saat menjalankan:
+  git difftool
+  git difftool <commit1> <commit2>
+
+Keterangan variabel:
+- $LOCAL  : versi file lama
+- $REMOTE : versi file baru
+
+
+--------------------------------------------------
+4. CEK SEMUA KONFIGURASI GIT
+--------------------------------------------------
+
+Perintah:
 git config --list --show-origin
+
+Penjelasan:
+- Menampilkan semua konfigurasi Git yang aktif
+- --show-origin menunjukkan lokasi file konfigurasi:
+  - system  : konfigurasi global sistem
+  - global  : konfigurasi user (~/.gitconfig)
+  - local   : konfigurasi khusus repository (.git/config)
+
+Contoh output lokasi:
+file:C:/Program Files/Git/etc/gitconfig
+file:C:/Users/<username>/.gitconfig
+file:.git/config
+
+
+--------------------------------------------------
+5. CATATAN TAMBAHAN
+--------------------------------------------------
+
+- Jika salah set nama atau email, bisa diganti kapan saja
+- Konfigurasi --global TIDAK mengubah repo orang lain
+- Untuk repo tertentu saja, hilangkan --global
+
+Contoh (hanya untuk 1 repo):
+git config user.name "Nama Repo Ini"
+git config user.email "email-repo@email.com"
+
+
+--------------------------------------------------
+SELESAI
+--------------------------------------------------
