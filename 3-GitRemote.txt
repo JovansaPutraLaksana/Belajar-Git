@@ -46,6 +46,9 @@ origin
 Melihat daftar remote:
 git remote
 
+Untuk melihat link remote:
+git remote get-url <nama-remote>
+
 Melihat detail remote (URL fetch & push):
 git remote -v
 
