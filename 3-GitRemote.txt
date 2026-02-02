@@ -53,6 +53,8 @@ git remote -v
 --------------------------------------------------
 4. MENAMBAHKAN REMOTE REPOSITORY
 --------------------------------------------------
+Sebelum remote ubah branch master menjadi main
+git branch -M main
 
 Perintah:
 git remote add <nama-remote> <url>
