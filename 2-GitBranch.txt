@@ -44,8 +44,8 @@ feature-login ---- D ---- E
 Melihat semua branch lokal:
 git branch
 
-Melihat branch aktif (bertanda *):
-git branch
+Melihat branch aktif (bertanda * untuk lokasi saat ini):
+git branch --list
 
 Melihat nama branch aktif saja:
 git branch --show-current
