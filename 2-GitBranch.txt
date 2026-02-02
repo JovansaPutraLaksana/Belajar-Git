@@ -45,7 +45,7 @@ Melihat semua branch lokal:
 git branch
 
 Melihat branch aktif (bertanda *):
-git branch
+git branch tes konflik merge
 
 Melihat nama branch aktif saja:
 git branch --show-current
