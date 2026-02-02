@@ -65,7 +65,75 @@ Keterangan variabel:
 
 
 --------------------------------------------------
-4. CEK SEMUA KONFIGURASI GIT
+4. GENERATE SSH KEY UNTUK GITHUB (WAJIB UNTUK SSH)
+--------------------------------------------------
+
+Perintah:
+ssh-keygen
+ssh-keygen -t ed25519 -C "email-github@email.com"
+
+Penjelasan:
+- Membuat SSH key dengan algoritma ED25519 (aman & modern)
+- Email hanya sebagai label/identitas
+- Tekan ENTER saat diminta lokasi file
+- Tekan ENTER lagi jika tidak ingin password tambahan
+
+File yang dihasilkan (di folder ~/.ssh):
+- id_ed25519      → SSH PRIVATE KEY
+- id_ed25519.pub  → SSH PUBLIC KEY
+
+
+--------------------------------------------------
+5. PENJELASAN SSH PUBLIC KEY & PRIVATE KEY
+--------------------------------------------------
+
+SSH PRIVATE KEY (id_ed25519):
+- Bersifat RAHASIA
+- Digunakan oleh komputer/laptop kamu untuk autentikasi
+- JANGAN dibagikan, diupload, atau di-commit ke repository
+
+SSH PUBLIC KEY (id_ed25519.pub):
+- Boleh dibagikan
+- Didaftarkan ke GitHub
+- Digunakan GitHub untuk mengenali komputer kamu
+
+Analogi sederhana:
+- Public key  = gembok
+- Private key = kunci gembok
+
+
+--------------------------------------------------
+6. MENAMBAHKAN SSH KEY KE GITHUB
+--------------------------------------------------
+
+Perintah untuk menampilkan public key:
+cat ~/.ssh/id_ed25519.pub
+
+Langkah di GitHub:
+1. Buka GitHub
+2. Settings → SSH and GPG keys
+3. Klik "New SSH key"
+4. Paste isi id_ed25519.pub
+5. Save
+
+
+--------------------------------------------------
+7. TES KONEKSI SSH KE GITHUB
+--------------------------------------------------
+
+Perintah:
+ssh -T git@github.com
+
+Jika berhasil, akan muncul pesan:
+Hi <username>! You've successfully authenticated, but GitHub does not provide shell access.
+
+Catatan:
+- Jika pertama kali, akan diminta konfirmasi fingerprint (ketik: yes)
+- Perintah ini hanya mengetes KONEKSI, tidak mengubah repository
+
+
+--------------------------------------------------
+8. CEK SEMUA KONFIGURASI GIT
 --------------------------------------------------
 
 Perintah:
@@ -85,10 +153,12 @@ file:.git/config
 
 
 --------------------------------------------------
-5. CATATAN TAMBAHAN
+9. CATATAN TAMBAHAN
 --------------------------------------------------
 
-- Jika salah set nama atau email, bisa diganti kapan saja
+- SSH key bersifat per perangkat (1 laptop = 1 key)
+- Jangan upload folder ~/.ssh ke GitHub
+- Jika ganti laptop, buat SSH key baru
 - Konfigurasi --global TIDAK mengubah repo orang lain
 - Untuk repo tertentu saja, hilangkan --global
 
