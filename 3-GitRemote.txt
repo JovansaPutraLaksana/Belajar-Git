@@ -1,0 +1,275 @@
+CATATAN GIT REMOTE
+=================
+
+Catatan ini membahas penggunaan Git Remote,
+yaitu menghubungkan repository LOCAL dengan repository REMOTE
+seperti GitHub, GitLab, atau Bitbucket.
+
+
+--------------------------------------------------
+1. APA ITU GIT REMOTE
+--------------------------------------------------
+
+Git Remote:
+- Repository Git yang berada di server (online)
+- Contoh:
+  - GitHub
+  - GitLab
+  - Bitbucket
+
+Tujuan Git Remote:
+- Backup repository
+- Kolaborasi tim
+- Sinkronisasi kode antar komputer
+
+
+--------------------------------------------------
+2. ISTILAH PENTING DALAM GIT REMOTE
+--------------------------------------------------
+
+Local Repository
+- Repository di komputer pribadi
+
+Remote Repository
+- Repository di server (GitHub, dll)
+
+origin
+- Nama default remote repository
+- Bukan keyword khusus, hanya nama alias
+- Bisa diganti, tapi biasanya tetap "origin"
+
+
+--------------------------------------------------
+3. MELIHAT REMOTE YANG TERDAFTAR
+--------------------------------------------------
+
+Melihat daftar remote:
+git remote
+
+Melihat detail remote (URL fetch & push):
+git remote -v
+
+
+--------------------------------------------------
+4. MENAMBAHKAN REMOTE REPOSITORY
+--------------------------------------------------
+
+Perintah:
+git remote add <nama-remote> <url>
+
+Contoh (GitHub):
+git remote add origin https://github.com/username/nama-repo.git
+
+Penjelasan:
+- origin : nama remote
+- URL    : alamat repository remote
+
+
+--------------------------------------------------
+5. MENGUBAH URL REMOTE
+--------------------------------------------------
+
+Perintah:
+git remote set-url origin <url-baru>
+
+Contoh:
+git remote set-url origin https://github.com/username/repo-baru.git
+
+Digunakan saat:
+- Ganti repository GitHub
+- Pindah akun
+- Ganti HTTPS ke SSH
+
+
+--------------------------------------------------
+6. MENGHAPUS REMOTE
+--------------------------------------------------
+
+Perintah:
+git remote remove <nama-remote>
+
+Contoh:
+git remote remove origin
+
+
+--------------------------------------------------
+7. MENGIRIM PERUBAHAN KE REMOTE (PUSH)
+--------------------------------------------------
+
+Push branch ke remote:
+git push origin <nama-branch>
+
+Contoh:
+git push origin main
+
+Push pertama kali (set upstream):
+git push -u origin main
+
+Penjelasan:
+- -u membuat relasi antara branch lokal & remote
+- Setelah itu cukup pakai: git push
+
+
+--------------------------------------------------
+8. MENGAMBIL PERUBAHAN DARI REMOTE (FETCH & PULL)
+--------------------------------------------------
+
+git fetch
+- Mengambil update dari remote
+- TIDAK mengubah branch lokal
+
+git pull
+- = git fetch + git merge
+- Mengambil update lalu langsung digabung ke branch aktif
+
+Contoh:
+git pull origin main
+
+
+--------------------------------------------------
+9. PERBEDAAN FETCH VS PULL
+--------------------------------------------------
+
+git fetch
+- Aman
+- Hanya update data remote
+- Cocok untuk cek perubahan dulu
+
+git pull
+- Langsung merge
+- Bisa menimbulkan conflict
+
+
+--------------------------------------------------
+10. CLONE REPOSITORY
+--------------------------------------------------
+
+Perintah:
+git clone <url>
+
+Contoh:
+git clone https://github.com/username/nama-repo.git
+
+Penjelasan:
+- Membuat folder baru
+- Sudah otomatis:
+  - git init
+  - remote origin
+  - branch default
+
+
+--------------------------------------------------
+11. REMOTE BRANCH
+--------------------------------------------------
+
+Melihat semua branch (lokal + remote):
+git branch -a
+
+Melihat hanya remote branch:
+git branch -r
+
+Contoh remote branch:
+origin/main
+origin/develop
+
+
+--------------------------------------------------
+12. MENARIK REMOTE BRANCH KE LOKAL
+--------------------------------------------------
+
+Perintah:
+git checkout -b <branch-lokal> origin/<branch-remote>
+
+Contoh:
+git checkout -b develop origin/develop
+
+Atau (cara modern):
+git switch -c develop origin/develop
+
+
+--------------------------------------------------
+13. MENGHAPUS BRANCH DI REMOTE
+--------------------------------------------------
+
+Perintah:
+git push origin --delete <nama-branch>
+
+Contoh:
+git push origin --delete feature-login
+
+
+--------------------------------------------------
+14. RENAME BRANCH DI REMOTE
+--------------------------------------------------
+
+Langkah:
+1. Rename branch lokal
+2. Push branch baru
+3. Hapus branch lama di remote
+
+Contoh:
+git branch -m main utama
+git push origin utama
+git push origin --delete main
+
+
+--------------------------------------------------
+15. AUTHENTICATION (LOGIN GITHUB)
+--------------------------------------------------
+
+Metode umum:
+1. HTTPS + Token (disarankan)
+2. SSH Key
+
+Catatan:
+- GitHub TIDAK lagi mendukung password biasa
+- Gunakan Personal Access Token (PAT)
+
+
+--------------------------------------------------
+16. WORKFLOW DASAR LOCAL → REMOTE
+--------------------------------------------------
+
+1. git status
+2. git add .
+3. git commit -m "pesan"
+4. git push origin <branch>
+
+
+--------------------------------------------------
+17. WORKFLOW DASAR REMOTE → LOCAL
+--------------------------------------------------
+
+1. git fetch
+2. git log / git diff
+3. git pull
+
+
+--------------------------------------------------
+18. KESALAHAN UMUM
+--------------------------------------------------
+
+Error: rejected (non-fast-forward)
+Penyebab:
+- Local tertinggal dari remote
+
+Solusi:
+git pull --rebase
+atau
+git pull
+
+
+--------------------------------------------------
+19. BEST PRACTICE
+--------------------------------------------------
+
+- Selalu pull sebelum mulai kerja
+- Jangan push langsung ke main (kerja tim)
+- Gunakan branch feature
+- Push commit kecil dan jelas
+- Cek status sebelum push
+
+
+--------------------------------------------------
+SELESAI
+--------------------------------------------------

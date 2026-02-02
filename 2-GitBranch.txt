@@ -1,0 +1,238 @@
+CATATAN GIT BRANCH
+=================
+
+Catatan ini membahas konsep dan penggunaan Git Branch
+pada repository LOCAL maupun sebagai dasar kerja tim.
+
+
+--------------------------------------------------
+1. APA ITU GIT BRANCH
+--------------------------------------------------
+
+Branch:
+- Cabang pengembangan di Git
+- Setiap branch punya alur commit sendiri
+- Digunakan untuk:
+  - Mengembangkan fitur baru
+  - Memperbaiki bug
+  - Eksperimen tanpa merusak branch utama
+
+Branch utama biasanya bernama:
+- master (lama)
+- main (standar sekarang)
+
+
+--------------------------------------------------
+2. KONSEP DASAR BRANCH
+--------------------------------------------------
+
+- Branch adalah POINTER ke commit tertentu
+- HEAD menunjuk ke branch yang sedang aktif
+- Saat commit:
+  - Commit baru akan mengikuti branch aktif
+
+Ilustrasi:
+main ---- A ---- B ---- C
+                  \
+feature-login ---- D ---- E
+
+
+--------------------------------------------------
+3. MELIHAT DAFTAR BRANCH
+--------------------------------------------------
+
+Melihat semua branch lokal:
+git branch
+
+Melihat branch aktif (bertanda *):
+git branch
+
+Melihat nama branch aktif saja:
+git branch --show-current
+
+
+--------------------------------------------------
+4. MEMBUAT BRANCH BARU
+--------------------------------------------------
+
+Perintah:
+git branch <nama-branch>
+
+Contoh:
+git branch feature-login
+
+Catatan:
+- Branch dibuat dari posisi HEAD saat ini
+- Belum berpindah ke branch tersebut
+
+
+--------------------------------------------------
+5. PINDAH BRANCH (CHECKOUT / SWITCH)
+--------------------------------------------------
+
+Pindah ke branch tertentu:
+git checkout <nama-branch>
+
+Contoh:
+git checkout feature-login
+
+Cara modern (disarankan):
+git switch <nama-branch>
+
+
+--------------------------------------------------
+6. MEMBUAT DAN PINDAH BRANCH SEKALIGUS
+--------------------------------------------------
+
+Perintah:
+git checkout -b <nama-branch>
+
+Atau:
+git switch -c <nama-branch>
+
+Contoh:
+git checkout -b feature-register
+
+
+--------------------------------------------------
+7. WORKFLOW DASAR MENGGUNAKAN BRANCH
+--------------------------------------------------
+
+1. Pastikan berada di branch main
+2. Buat branch fitur
+3. Pindah ke branch fitur
+4. Lakukan perubahan + commit
+5. Merge ke main
+6. Hapus branch fitur jika sudah selesai
+
+
+--------------------------------------------------
+8. MELAKUKAN MERGE BRANCH
+--------------------------------------------------
+
+Langkah merge:
+1. Pindah ke branch tujuan (biasanya main)
+2. Jalankan merge
+
+Perintah:
+git merge <nama-branch>
+
+Contoh:
+git checkout main
+git merge feature-login
+
+
+--------------------------------------------------
+9. JENIS MERGE
+--------------------------------------------------
+
+1. Fast Forward Merge
+- Tidak ada commit baru di main
+- Pointer main langsung maju
+
+2. Three-way Merge
+- Ada commit berbeda di kedua branch
+- Git membuat commit merge baru
+
+
+--------------------------------------------------
+10. MERGE CONFLICT
+--------------------------------------------------
+
+Terjadi saat:
+- File yang sama diubah di dua branch
+- Git tidak bisa menentukan mana yang benar
+
+Langkah menyelesaikan conflict:
+1. Buka file yang conflict
+2. Pilih / gabungkan kode yang benar
+3. Hapus tanda conflict (<<<< >>>>)
+4. git add <file>
+5. git commit
+
+
+--------------------------------------------------
+11. MENGHAPUS BRANCH
+--------------------------------------------------
+
+Menghapus branch lokal (aman):
+git branch -d <nama-branch>
+
+Paksa hapus branch:
+git branch -D <nama-branch>
+
+Catatan:
+- Tidak bisa menghapus branch yang sedang aktif
+
+
+--------------------------------------------------
+12. MELIHAT RIWAYAT BRANCH
+--------------------------------------------------
+
+Melihat graph branch:
+git log --oneline --graph --all
+
+Sangat berguna untuk:
+- Memahami alur merge
+- Debug histori commit
+
+
+--------------------------------------------------
+13. PINDAH BRANCH TANPA KEHILANGAN PERUBAHAN
+--------------------------------------------------
+
+Jika ada perubahan belum commit:
+- Git akan menolak pindah branch jika konflik
+
+Solusi:
+1. Commit perubahan
+ATAU
+2. Gunakan stash (lanjutan materi)
+
+Perintah stash:
+git stash
+git switch <branch>
+git stash pop
+
+
+--------------------------------------------------
+14. RENAME BRANCH
+--------------------------------------------------
+
+Rename branch saat ini:
+git branch -m <nama-baru>
+
+Rename branch lain:
+git branch -m <lama> <baru>
+
+
+--------------------------------------------------
+15. BEST PRACTICE PENAMAAN BRANCH
+--------------------------------------------------
+
+Contoh penamaan yang baik:
+feature-login
+feature-absensi
+bugfix-crash-login
+hotfix-gaji-error
+experiment-ui
+
+Hindari:
+branch1
+test
+coba-coba
+
+
+--------------------------------------------------
+16. CATATAN PENTING
+--------------------------------------------------
+
+- Jangan kerja langsung di main
+- Satu branch = satu tujuan
+- Sering commit kecil dan jelas
+- Hapus branch yang sudah selesai
+
+
+--------------------------------------------------
+SELESAI
+--------------------------------------------------
