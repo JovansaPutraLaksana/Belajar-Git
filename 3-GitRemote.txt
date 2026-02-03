@@ -59,6 +59,7 @@ git remote -v
 Sebelum remote ubah branch master menjadi main
 git branch -M main
 
+Nama remote adalah shortcut untuk url dari repository github yang akan disimpan di .git local
 Perintah:
 git remote add <nama-remote> <url>
 
@@ -102,7 +103,10 @@ git remote remove origin
 --------------------------------------------------
 
 Push branch ke remote:
-git push origin <nama-branch>
+git push <nama-remote> <nama-branch>
+
+push branch ke remote dengan nama berbeda
+git push <nama-remote> <nama-branch-local>:<nama-branch-remote>
 
 Contoh:
 git push origin main
