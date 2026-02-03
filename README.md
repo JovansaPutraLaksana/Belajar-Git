@@ -35,7 +35,9 @@ Berikut adalah daftar file utama yang ada di repo ini:
    git clone https://github.com/JovansaPutraLaksana/Belajar-Git.git
    
 2. **Baca setiap file .txt untuk memahami konsep dasar Git**
+   
     Setiap file memberikan insight langkah demi langkah tentang topik tertentu.
 
 3. **Praktikkan setiap perintah pada terminal/bash**
-    Contoh: git init, git status, git add, git commit, dll — untuk memperkuat pemahaman.
+   
+    Contoh: git init, git status, git add, git commit, dll untuk memperkuat pemahaman.
